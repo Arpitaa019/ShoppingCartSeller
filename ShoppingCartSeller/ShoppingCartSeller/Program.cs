@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjectsLibrary.Service;
 using ProjectsLibrary.Service.Abstraction.Product;
 using ProjectsLibrary.Service.Services.Product;
@@ -29,6 +30,8 @@ using ShoppingCartSeller.Services.Service.Sellers;
 var builder = WebApplication.CreateBuilder(args);
 
 
+builder.Services.AddDbContext<ShoppingCartSellerDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
 // Add services to the container.
@@ -36,7 +39,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddProjectsLibraryServices();
 builder.Services.AddSingleton<DbHelper>();
 
-builder.Services.AddSingleton<ISellerDetailsRepository, SellerDetailsRepository>();
+builder.Services.AddScoped<ISellerDetailsRepository, SellerDetailsRepository>();
 builder.Services.AddScoped<ISellerDetailsService, SellerDetailsService>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<ICompanyService, CompanyService>();

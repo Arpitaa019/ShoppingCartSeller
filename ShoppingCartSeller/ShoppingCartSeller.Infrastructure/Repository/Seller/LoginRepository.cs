@@ -1,84 +1,39 @@
-﻿using ShoppingCartSeller.Core.Entities.Sellers;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoppingCartSeller.Core.Entities.Sellers;
 using ShoppingCartSeller.Core.Repository.Abstraction.Sellers;
 using ShoppingCartSeller.Infrastructure.Sql;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace ShoppingCartSeller.Infrastructure.Repository.Seller
 {
     public class LoginRepository : ILoginRepository
     {
-        private readonly DbHelper _db;
-        public LoginRepository(DbHelper db)
+        private readonly ShoppingCartSellerDbContext _context;
+        public LoginRepository(ShoppingCartSellerDbContext context)
         {
-            _db = db;
+            _context = context;
         }
         public async Task AddLoginAsync(SellerLogin login, int sellerId)
         {
-            var loginIdParam = new SqlParameter("@LoginId", SqlDbType.Int) { Direction = ParameterDirection.Output };
-            await _db.ExecuteNonQueryAsync(SellerSql.InsertSellerLogin, new[]
-            {
-                     new SqlParameter("@Email", login.Email),
-                        new SqlParameter("@Password", login.Password),
-                        new SqlParameter("@SellerId", sellerId),
-                        new SqlParameter("@CreatedDate", DateTime.UtcNow),
-                        loginIdParam
-               }, CommandType.StoredProcedure);
-            login.LoginId = (int)loginIdParam.Value;
+            login.SellerId = sellerId;
+            _context.SellerLogins.Add(login);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<SellerLogin>> GetAllAsync()
         {
-            var logins = new List<SellerLogin>();
-            var dt = await _db.ExecuteReader(SellerSql.GetAllSellerLogins, null, CommandType.StoredProcedure);
-
-            foreach (DataRow row in dt.Rows)
-            {
-                logins.Add(new SellerLogin
-                {
-                    LoginId = Convert.ToInt32(row["LoginId"]),
-                    SellerId = Convert.ToInt32(row["SellerId"]),
-                    Email = row["Email"]?.ToString(),
-                    Password = row["Password"]?.ToString(),
-                    CreatedDate = Convert.ToDateTime(row["CreatedDate"])
-                });
-            }
-
-            return logins;
-
+            return await _context.SellerLogins.ToListAsync();
         }
 
         public async Task<SellerLogin> GetLoginBySellerIdAsync(int sellerId)
         {
-
-            var dt = await _db.ExecuteReader(SellerSql.GetLoginBySellerId,
-                new[] { new SqlParameter("@SellerId", sellerId) }, CommandType.StoredProcedure);
-
-            if (dt.Rows.Count == 0)
-                return null;
-
-            var row = dt.Rows[0];
-            return new SellerLogin
-            {
-                LoginId = Convert.ToInt32(row["LoginId"]),
-                SellerId = Convert.ToInt32(row["SellerId"]),
-                Email = row["Email"]?.ToString(),
-                Password = row["Password"]?.ToString(),
-                CreatedDate = Convert.ToDateTime(row["CreatedDate"])
-            };
+            return await _context.SellerLogins.FirstOrDefaultAsync(l => l.SellerId == sellerId);
         }
         public async Task<bool> UpdateLoginAsync(SellerLogin login, int sellerId)
         {
-            var parameters = new[]
-            {
-                  new SqlParameter("@LoginId", login.LoginId),
-                new SqlParameter("@SellerId", sellerId),
-                new SqlParameter("@Email", login.Email),
-                new SqlParameter("@Password", login.Password),
-                new SqlParameter("@LastModifiedOn", DateTime.UtcNow),
-                new SqlParameter("@ModifiedBy", "System")
-             };
-            return await _db.ExecuteNonQueryAsync(SellerSql.UpdateSellerLoginDetails, parameters, CommandType.StoredProcedure) > 0;
+            login.SellerId = sellerId;
+            _context.SellerLogins.Update(login);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

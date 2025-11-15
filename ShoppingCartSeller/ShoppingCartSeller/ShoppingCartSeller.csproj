@@ -15,6 +15,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.7" />
+    
+    
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\ShoppingCartSeller.Services\ShoppingCartSeller.Services.csproj" />
 	</ItemGroup>
 
