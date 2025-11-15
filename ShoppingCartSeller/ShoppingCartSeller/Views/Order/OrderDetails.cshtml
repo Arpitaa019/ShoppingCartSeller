@@ -1,0 +1,119 @@
+﻿<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<div class="container my-4" style="font-family: 'Segoe UI', sans-serif;">
+    <div class="row g-4">
+        <!-- Left Column -->
+        <div class="col-md-8">
+            <h5 class="mb-3">Order Summary</h5>
+
+            <!-- Product Info -->
+            <div class="card mb-3" style="box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);">
+                <div class="card-body">
+                    <h6 id="product-name" class="mb-1"></h6>
+                    <p id="product-meta" class="mb-1 text-muted"></p>
+                    <p id="total-paid" class="mb-1 text-success fw-semibold"></p>
+                    <p id="offers-applied" class="mb-0 text-muted"></p>
+                </div>
+            </div>
+
+            <!-- Order Status -->
+            <div class="card mb-3" style="box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);">
+                <div class="card-body">
+                    <h6 class="mb-2">Order Status</h6>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li id="order-confirmed"></li>
+                        <li id="delivery-expected"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Delivery Details -->
+            <div class="card mb-3" style="box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);">
+                <div class="card-body">
+                    <h6 class="mb-2">Delivery Address</h6>
+                    <p id="delivery-address" class="mb-1"></p>
+                    <p id="recipient-info" class="mb-0"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-md-4">
+            <div class="card" style="box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);">
+                <div class="card-body">
+                    <h6 class="mb-3">Price Details</h6>
+                    <div class="d-flex justify-content-between"><span>Listing Price</span><span id="listing-price"></span></div>
+                    <div class="d-flex justify-content-between"><span>Selling Price</span><span id="selling-price"></span></div>
+                    <div class="d-flex justify-content-between"><span>Extra Discount</span><span id="extra-discount"></span></div>
+                    <div class="d-flex justify-content-between"><span>Special Price</span><span id="special-price"></span></div>
+                    <hr />
+                    <div class="d-flex justify-content-between fw-bold"><span>Total Amount</span><span id="total-amount"></span></div>
+                </div>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="card mt-3" style="box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);">
+                <div class="card-body">
+                    <h6 class="mb-2">Payment Method</h6>
+                    <p id="payment-method" class="mb-0"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        const order = {
+            productName: "Fargo Women Black Shoulder Bag",
+            color: "Black",
+            seller: "RetailPeople",
+            totalPaid: "₹298",
+            offers: 2,
+            orderConfirmed: "Dec 01, 2023",
+            deliveryExpected: "Dec 05, 2023",
+            address: "Room no 108, Luna chatr no1, Wadala(E), Laxman ...",
+            recipient: "Vandana Yadav",
+            contact: "00000000009",
+            price: {
+                listing: "₹1,690",
+                selling: "₹349",
+                discount: "-₹51",
+                special: "-₹298",
+                total: "₹298"
+            },
+            paymentMethod: "PhonePe"
+        };
+
+        // Inject product info
+        $('#product-name').text("👜 " + order.productName);
+        $('#product-meta').text(`Color: ${order.color} | Sold by ${order.seller}`);
+        $('#total-paid').text(`Total Paid: ${order.totalPaid}`);
+        $('#offers-applied').text(`Offers Applied: ${order.offers}`);
+
+        // Inject order status
+        $('#order-confirmed').html(`✔️ Order Confirmed: <strong>${order.orderConfirmed}</strong>`);
+        $('#delivery-expected').html(`🚚 Delivery Expected: <strong>${order.deliveryExpected}</strong>`);
+
+        // Highlight overdue delivery
+        const expectedDate = new Date(order.deliveryExpected);
+        const today = new Date();
+        if (today > expectedDate) {
+            $('#delivery-expected').css('color', 'red');
+        }
+
+        // Inject delivery details
+        $('#delivery-address').text(order.address);
+        $('#recipient-info').html(`Recipient: <strong>${order.recipient}</strong>, <span class="text-muted">${order.contact}</span>`);
+
+        // Inject price details
+        $('#listing-price').text(order.price.listing);
+        $('#selling-price').text(order.price.selling);
+        $('#extra-discount').text(order.price.discount);
+        $('#special-price').text(order.price.special);
+        $('#total-amount').text(order.price.total);
+
+        // Inject payment method
+        $('#payment-method').html(`📱 Paid via <strong>${order.paymentMethod}</strong>`);
+    });
+</script>

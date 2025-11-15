@@ -1,0 +1,103 @@
+﻿@using ProjectsLibrary.Models.Product
+@using ShoppingCartSeller.DTO.Orders
+@model List<ProductUploadModel>
+
+@{
+    ViewData["Title"] = "Dashboard Overview";
+    Layout = "~/Views/Shared/_LayoutSellerAdmin.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Orders Overview -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm text-white bg-info p-3">
+                <h6><i class="fa-solid fa-cart-shopping me-2"></i> Total Orders</h6>
+                <h3>@ViewBag.TotalOrders </h3>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm text-white bg-secondary p-3">
+                <h6><i class="fa-solid fa-hourglass-half me-2"></i> Pending Orders</h6>
+                <h3>@ViewBag.PendingOrders</h3>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm text-white bg-success p-3">
+                <h6><i class="fa-solid fa-check me-2"></i> Delivered Orders</h6>
+                <h3>@ViewBag.DeliveredOrders</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Info Cards -->
+    <div class="row g-8 mb-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm text-white bg-danger p-3">
+                <h6><i class="fa-solid fa-triangle-exclamation me-2"></i> Out of Stock</h6>
+                <h3>@Model?.Count(p => p?.InventoryModel?.AvailableQuantity == 0)</h3>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm text-dark bg-warning p-3">
+                <h6><i class="fa-solid fa-layer-group me-2"></i> Low Stock</h6>
+                <h3>@Model?.Count(p => p?.InventoryModel?.AvailableQuantity < p?.InventoryModel?.ReorderLevel && p?.InventoryModel?.AvailableQuantity > 0)</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Performance Table -->
+    <div class="card shadow-sm mb-5">
+        <div class="card-header bg-white fw-bold fs-5">
+            <i class="fa-solid fa-chart-line me-2"></i> Product Performance
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Brand</th>
+                            <th>Total Qty</th>
+                            <th>Available</th>
+                            <th>Status</th>
+                            <th>Last Restocked</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in Model ?? new List<ProductUploadModel>())
+                        {
+                            var master = p.ProductMasterModel;
+
+                            <tr>
+                                <td>@(master?.ProductName ?? "N/A")</td>
+                                <td>@(p.CategoryModel?.CategoryName ?? "N/A")</td>
+                                <td>@(p.BrandModel?.BrandName ?? "N/A")</td>
+                                <td>@(p.InventoryModel?.TotalQuantity ?? 0)</td>
+                                <td>@(p.InventoryModel?.AvailableQuantity ?? 0)</td>
+                                <td>
+                                    @if (p.InventoryModel?.AvailableQuantity == 0)
+                                    {
+                                        <span class="badge bg-danger">Out of Stock</span>
+                                    }
+                                    else if (p.InventoryModel?.AvailableQuantity < p.InventoryModel?.ReorderLevel)
+                                    {
+                                        <span class="badge bg-warning text-dark">Low Stock</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success">Available</span>
+                                    }
+                                </td>
+                                <td>@(p.InventoryModel?.LastRestocked?.ToString("dd MMM yyyy") ?? "Never")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.105.0" />
+    <PackageReference Include="ExcelDataReader" Version="3.8.0" />
+    <PackageReference Include="ExcelDataReader.DataSet" Version="3.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShoppingCartSeller.Core\ShoppingCartSeller.Core.csproj" />
+    <ProjectReference Include="..\ShoppingCartSeller.DTO\ShoppingCartSeller.DTO.csproj" />
+    <ProjectReference Include="..\ShoppingCartSeller.Infrastructure\ShoppingCartSeller.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ProjectsLibrary.Models">
+      <HintPath>..\..\..\ProjectsLibrary\ProjectsLibrary.Infrastructure\bin\Debug\net8.0\ProjectsLibrary.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="ProjectsLibrary.Service">
+      <HintPath>..\..\..\ProjectsLibrary\ProjectsLibrary.Service\bin\Debug\net8.0\ProjectsLibrary.Service.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

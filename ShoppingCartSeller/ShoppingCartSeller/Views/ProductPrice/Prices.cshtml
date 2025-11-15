@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Set Product Pricing";
+    Layout = "~/Views/Shared/_LayoutSellerAdmin.cshtml";
+}
+
+<h3 class="mb-4 text-primary fw-semibold">Set Product Pricing</h3>
+<div id="pricingMessage" class="alert d-none"></div>
+
+<form id="pricingForm" class="row g-3">
+    <div class="col-md-4">
+        <label class="form-label">Select Product</label>
+        <select id="ProductSelector" name="ProductID" class="form-select" required>
+            <option value="">-- Select Product --</option>
+            <option value="">    MRP    </option>
+            <option value="">    Brand    </option>
+            <option value="">    Category     </option>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">MRP</label>
+        <input type="number" step="0.01" name="MRP" id="MRP" class="form-control" required />
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">Discount (%)</label>
+        <input type="number" step="0.01" name="DiscountPercent" id="DiscountPercent" class="form-control" />
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">Additional Charge</label>
+        <input type="number" step="0.01" name="AdditionalCharge" id="AdditionalCharge" class="form-control" />
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">Deduction Amount</label>
+        <input type="number" step="0.01" name="DeductionAmount" id="DeductionAmount" class="form-control" />
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">Final Selling Price</label>
+        <input type="text" name="SellingPrice" id="FinalPrice" class="form-control" readonly />
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Effective From</label>
+        <input type="date" name="EffectiveFrom" id="EffectiveFrom" class="form-control" required />
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Effective To</label>
+        <input type="date" name="EffectiveTo" id="EffectiveTo" class="form-control" />
+    </div>
+
+    <div class="col-12 mt-3">
+        <button type="submit" class="btn btn-primary">Save Pricing</button>
+    </div>
+</form>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function calculateFinalPrice() {
+            const mrp = parseFloat($('#MRP').val()) || 0;
+            const discount = parseFloat($('#DiscountPercent').val()) || 0;
+            const add = parseFloat($('#AdditionalCharge').val()) || 0;
+            const deduct = parseFloat($('#DeductionAmount').val()) || 0;
+            const final = Math.max(0, mrp - (mrp * discount / 100) + add - deduct);
+            $('#FinalPrice').val(final.toFixed(2));
+        }
+
+        $(document).ready(function () {
+            $('#MRP, #DiscountPercent, #AdditionalCharge, #DeductionAmount').on('input', calculateFinalPrice);
+
+            $('#pricingForm').on('submit', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '/ProductPrice/Prices
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        $('#pricingMessage')
+                            .removeClass('d-none alert-danger')
+                            .addClass('alert-success')
+                            .text(response.message || 'Pricing saved successfully.');
+                    },
+                    error: function () {
+                        $('#pricingMessage')
+                            .removeClass('d-none alert-success')
+                            .addClass('alert-danger')
+                            .text('Failed to save pricing.');
+                    }
+                });
+            });
+        });
+    </script>
+}

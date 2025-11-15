@@ -1,0 +1,24 @@
+﻿@using ShoppingCartSeller.DTO.Orders;
+@model OrderDTO
+
+<h2>Invoice for Order @Model.OrderNumber</h2>
+<p>User ID: @Model.UserId</p>
+<p>Placed At: @Model.PlacedAt</p>
+<p>Total: ₹@Model.TotalAmount</p>
+
+<table>
+    <thead>
+        <tr><th>Title</th><th>Qty</th><th>Price</th><th>Seller</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.items)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Quantity</td>
+                <td>@item.Price</td>
+                <td>@item.Seller</td>
+            </tr>
+        }
+    </tbody>
+</table>

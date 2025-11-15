@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Seller Dashboard";
+    Layout = "~/Views/Shared/_LayoutSellerAdmin.cshtml";
+}
+<h2 class="fw-bold mb-4">Account Settings</h2>
+
+<form method="post" action="/Seller/UpdateSettings">
+    <div class="mb-3">
+        <label class="form-label">Display Name</label>
+        <input type="text" class="form-control" name="DisplayName" placeholder="Your store name">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email Notifications</label>
+        <select class="form-select" name="EmailPreference">
+            <option value="All">All</option>
+            <option value="OrdersOnly">Orders Only</option>
+            <option value="None">None</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Preferred Language</label>
+        <select class="form-select" name="Language">
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Settings</button>
+</form>

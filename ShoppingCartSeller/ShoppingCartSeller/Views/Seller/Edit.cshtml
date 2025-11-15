@@ -1,0 +1,155 @@
+﻿<h2>Test Edit POST</h2>
+
+<div class="card shadow-sm p-4" style="max-width:800px; margin:auto;">
+    <form id="testEditForm">
+        <input type="hidden" name="SellerId" value="0" />
+
+        <div class="mb-3">
+            <label>Full Name</label>
+            <input type="text" name="FullName" class="form-control" value="" />
+        </div>
+        <div class="mb-3">
+            <label>Email</label>
+            <input type="email" name="Email" class="form-control" value="" />
+        </div>
+        <div class="mb-3">
+            <label>Phone</label>
+            <input type="text" name="Phone" class="form-control" value="" />
+        </div>
+        <div class="mb-3">
+            <label>Role</label>
+            <input type="text" name="Role" class="form-control" value="" />
+        </div>
+
+        <h5>Company Info</h5>
+        <input type="hidden" name="Company.CompanyId" value="0" />
+        <div class="mb-3">
+            <label>Company Name</label>
+            <input type="text" name="Company.Name" class="form-control" value="" />
+        </div>
+        <div class="mb-3">
+            <label>City</label>
+            <input type="text" name="Company.City" class="form-control" value="" />
+        </div>
+        <div class="mb-3">
+            <label>State</label>
+            <input type="text" name="Company.State" class="form-control" value="" />
+        </div>
+        <div class="mb-3">
+            <label>GSTIN</label>
+            <input type="text" name="Company.GSTIN" class="form-control" value="" />
+        </div>
+
+        <h5>Login Info</h5>
+        <input type="hidden" name="SellerLogin.LoginId" value="0" />
+        <div class="mb-3">
+            <label>Login Email</label>
+            <input type="email" name="SellerLogin.Email" class="form-control" value="" />
+        </div>
+        <div class="mb-3">
+            <label>Password</label>
+            <input type="password" name="SellerLogin.Password" class="form-control" value="" />
+        </div>
+
+        <button type="button" id="btnUpdate" class="btnUpdate btn btn-success">UPDATE</button>
+    </form>
+
+    <div id="responseMessage" class="mt-3"></div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            loadDetailsById();
+
+            function loadDetailsById() {
+                var sellerId = @ViewBag.SellerId;
+                $.ajax({
+                    type: 'GET',
+                    url: '/Seller/LoadSellerDetails/' + sellerId,
+                    success: function (res) {
+                        console.log(res);
+                        if (res.success && res.data && res.data.seller) {
+                            const seller = res.data.seller;
+                            const company = seller.company || {};
+                            const login = seller.sellerLogin || {};
+
+
+                            // Seller fields
+                            $('input[name="SellerId"]').val(seller.sellerId || 0);
+                            $('input[name="FullName"]').val(seller.fullName || '');
+                            $('input[name="Email"]').val(seller.email || '');
+                            $('input[name="Phone"]').val(seller.phone || '');
+                            $('input[name="Role"]').val(seller.role || '');
+
+                            // Company fields
+                            $('input[name="Company.CompanyId"]').val(company.companyId || 0);
+                            $('input[name="Company.Name"]').val(company.name || '');
+                            $('input[name="Company.City"]').val(company.city || '');
+                            $('input[name="Company.State"]').val(company.state || '');
+                            $('input[name="Company.GSTIN"]').val(company.gstin || '');
+
+                            //Credential
+                            $('input[name="SellerLogin.LoginId"]').val(login.loginId || 0);
+                            $('input[name="SellerLogin.Email"]').val(login.email || '');
+                            $('input[name="SellerLogin.Password"]').val(login.password || '');
+
+                            $('#responseMessage').html('');
+                        } else {
+                            $('#responseMessage').html('<p style="color:red;">' + (res.message || 'No data found.') + '</p>');
+                        }
+                    },
+                    error: function (xhr) {
+                        $('#responseMessage').html('<p style="color:red;">Error: ' + xhr.responseText + '</p>');
+                    }
+
+                });
+            }
+
+            $('#btnUpdate').click(function (e) {
+                e.preventDefault();
+
+                const model = {
+                    SellerId: $('input[name="SellerId"]').val(),
+                    FullName: $('input[name="FullName"]').val(),
+                    Email: $('input[name="Email"]').val(),
+                    Phone: $('input[name="Phone"]').val(),
+                    Role: $('input[name="Role"]').val(),
+                    Company: {
+                        CompanyId: $('input[name="Company.CompanyId"]').val(),
+                        Name: $('input[name="Company.Name"]').val(),
+                        City: $('input[name="Company.City"]').val(),
+                        State: $('input[name="Company.State"]').val(),
+                        GSTIN: $('input[name="Company.GSTIN"]').val()
+                    },
+                    SellerLogin: {
+                        LoginId: $('input[name="SellerLogin.LoginId"]').val(),
+                        Email: $('input[name="SellerLogin.Email"]').val(),
+                        Password: $('input[name="SellerLogin.Password"]').val()
+                    }
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Seller/Edit',
+                    data: JSON.stringify(model),
+                    contentType: 'application/json',
+
+                    success: function (res) {
+                        $('#responseMessage').html(
+                            '<div class="alert alert-' + (res.success ? 'success' : 'danger') + '">' + res.message + '</div>'
+                        );
+                    },
+                    error: function (xhr) {
+                        $('#responseMessage').html('<div class="alert alert-danger">Error: ' + xhr.responseText + '</div>');
+                    }
+                });
+            });
+
+
+
+        });
+    </script>
+}

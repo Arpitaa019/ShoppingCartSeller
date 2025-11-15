@@ -1,0 +1,47 @@
+﻿@model ProjectsLibrary.Models.Product.ProductUploadModel
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5>Edit Product</h5>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" method="post">
+                <input type="hidden" asp-for="ProductMasterModel.ProductId" />
+
+                <div class="mb-3">
+                    <label asp-for="ProductMasterModel.ProductName" class="form-label"></label>
+                    <input asp-for="ProductMasterModel.ProductName" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ProductMasterModel.Code" class="form-label"></label>
+                    <input asp-for="ProductMasterModel.Code" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ProductMasterModel.Description" class="form-label"></label>
+                    <textarea asp-for="ProductMasterModel.Description" class="form-control"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ProductPriceModel.MRP" class="form-label"></label>
+                    <input asp-for="ProductPriceModel.MRP" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ProductPriceModel.SellingPrice" class="form-label"></label>
+                    <input asp-for="ProductPriceModel.SellingPrice" class="form-control" />
+                </div>
+
+                <!-- Add more fields as needed -->
+
+                <button type="submit" class="btn btn-success">Save Changes</button>
+                <a href="/Seller/UploadedProducts" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

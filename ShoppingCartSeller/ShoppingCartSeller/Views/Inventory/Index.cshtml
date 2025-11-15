@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Inventory Details";
+    Layout = "~/Views/Shared/_LayoutSellerAdmin.cshtml";
+}
+
+<h2 style="font-family:Segoe UI, sans-serif; font-weight:600; color:#333; margin-bottom:5px;">Inventory Details</h2>
+
+<table id="inventoryTable" class="table table-bordered table-hover table-sm" style="width:100%; font-family:'Segoe UI', sans-serif; font-size:14px;">
+    <thead style="background-color:darkslategrey; color:white;">
+        <tr>
+            <th>Inventory ID</th>
+            <th>Product_ID</th>
+            <th>Name</th>
+            <th>Code</th>
+            <th>Material</th>
+            <th>Seller ID</th>
+            <th>Total_Quantity</th>
+            <th>Blocked Quantity</th>
+            <th>Consumed Quantity</th>
+            <th>Available_Quantity</th>
+            <th>Reorder Level</th>
+            <th>Is Available</th>
+            <th>Last Restocked</th>
+            <th>Created Date</th>
+            <th>Last Updated</th>
+        </tr>
+    </thead>
+</table>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+
+    <script>
+        $(document).ready(function () {
+            $('#inventoryTable').DataTable({
+                ajax: {
+                    url: '/Inventory/GetDummyInventory',
+                    type: 'GET',
+                    dataSrc: 'data' // adjust if your JSON structure is different
+                },
+                columns: [
+                    { data: 'inventoryID' },
+                    { data: 'productID' },
+                    { data: 'product.productName' },
+                    { data: 'product.code' },
+                    { data: 'product.material' },
+                    { data: 'sellerID' },
+                    { data: 'totalQuantity' },
+                    { data: 'blockedQuantity' },
+                    { data: 'consumedQuantity' },
+                    { data: 'availableQuantity' },
+                    { data: 'reorderLevel' },
+                    {
+                        data: 'isAvailable',
+                        render: function (data) {
+                            return data ? 'Yes' : 'No';
+                        }
+                    },
+                    { data: 'lastRestocked' },
+                    { data: 'createdDate' },
+                    { data: 'lastUpdated' }
+                ],
+                rowCallback: function (row, data) {
+                    if (data.availableQuantity > 5) {
+                        $(row).addClass('table-success');
+                    } else if (data.availableQuantity <= 0) {
+                        $(row).addClass('table-danger');
+                    } else {
+                        $(row).addClass('table-warning');
+                    }
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,114 @@
+﻿@{
+    ViewData["Title"] = "Uploaded Products";
+    Layout = "~/Views/Shared/_LayoutSellerAdmin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-success text-white px-3 py-2">
+            <div class="row w-100 align-items-center">
+                <div class="col">
+                    <h4 class="mb-0">Uploaded Products</h4>
+                </div>
+                <div class="col-auto">
+                    <input type="text" id="productSearch" class="form-control form-control-sm" style="width: 160px;" placeholder="Search products..." />
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <a href="/ProductUpload/AddProduct" class="btn btn-primary mb-3">Add New Product</a>
+            <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                <table id="productTable" class="table table-bordered table-striped table-hover mb-0">
+                    <thead class="table-secondary sticky-top">
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Category</th>
+                            <th>SubCategory</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Code</th>
+                            <th>Material</th>
+                            <th>Description</th>
+                            <th>Specifications</th>
+                            <th>Color</th>
+                            <th>Size</th>
+                            <th>MRP</th>
+                            <th>Selling Price</th>
+                            <th>TotalQuantity</th>
+                            <th>Seller ID</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productTableBody">
+                        <tr>
+                            <td colspan="16" class="text-center text-muted">Loading products...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Load product data
+            $.ajax({
+                url: '/Dashboard/LoadProductDetails',
+                type: 'POST',
+                success: function (response) {
+                    const products = response.data?.products;
+
+                    if (!response.success || !products || products.length === 0) {
+                        $("#productTableBody").html("<tr><td colspan='16' class='text-center text-muted'>No products uploaded yet.</td></tr>");
+                        return;
+                    }
+
+                    let rowsHtml = '';
+
+                    products.forEach(function (product) {
+                        rowsHtml += `
+                                    <tr>
+                                        <td>${product.productMasterModel?.productName || ''}</td>
+                                        <td>${product.categoryModel?.categoryName || ''}</td>
+                                        <td>${product.subCategoryModel?.subCategoryName || ''}</td>
+                                        <td>${product.brandModel?.brandName || ''}</td>
+                                        <td>${product.productModel?.modelName || ''}</td>
+                                        <td>${product.productMasterModel?.code || ''}</td>
+                                        <td>${product.productMasterModel?.material || ''}</td>
+                                        <td>${product.productMasterModel?.description || ''}</td>
+                                        <td>${product.productMasterModel?.specifications || ''}</td>
+                                        <td>${product.productMasterModel?.color || ''}</td>
+                                        <td>${product.productMasterModel?.size || ''}</td>
+                                        <td>${product.productPriceModel?.mrp || 0}</td>
+                                        <td>${product.productPriceModel?.sellingPrice || 0}</td>
+                                        <td>${product.productMasterModel?.inventory?.totalQuantity || 0}</td>
+                                        <td>${product.sellerID || ''}</td>
+                                         <td>
+                                                <a href="/ProductUpload/Edit/${product.productMasterModel?.productId}" class="btn btn-sm btn-warning me-1">Edit</a>
+                                                <a href="/ProductUpload/Delete/${product.productMasterModel?.productId}" class="btn btn-sm btn-danger">Delete</a>
+                                          </td>
+                                    </tr>
+                                `;
+                    });
+
+                    $("#productTableBody").html(rowsHtml);
+                },
+                error: function () {
+                    $("#productTableBody").html("<tr><td colspan='15' class='text-danger text-center'>Failed to load products.</td></tr>");
+                }
+            });
+
+            // Search filter
+            $("#productSearch").on("input", function () {
+                const query = $(this).val().toLowerCase();
+                $("#productTableBody tr").each(function () {
+                    const rowText = $(this).text().toLowerCase();
+                    $(this).toggle(rowText.includes(query));
+                });
+            });
+        });
+    </script>
+}

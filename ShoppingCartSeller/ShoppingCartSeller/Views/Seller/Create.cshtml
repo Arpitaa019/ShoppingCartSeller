@@ -1,0 +1,115 @@
+﻿@{
+        ViewData["Title"] = "Register Seller";
+}
+
+<h4 style=" color:cadetblue; text-align:center; font-family:'Segoe UI'; margin-bottom:5px;">Complete Seller Registration</h4>
+
+<form id="sellerForm" method="post" style="max-width:960px; margin:auto; padding:2px; background:#f9f9f9; border-radius:8px; box-shadow:0 0 8px rgba(0,0,0,0.1); font-family:'Segoe UI'; font-size:14px;">
+
+    <!-- 🔹 Seller Personnel -->
+    <fieldset style="margin-bottom:4px;">
+        <legend style=" font-weight:bold; margin-bottom:2px;">Seller Personnel</legend>
+
+        <div style="display:flex; gap:18px; margin-bottom:2px;">
+            <div style="flex:1; display:flex; align-items:center;">
+                <label style="width:100px;">Full Name</label>
+                <input name="FullName" style="flex:1; padding:5px;" />
+            </div>
+            <div style="flex:1; display:flex; align-items:center;">
+                <label style="width:100px;">Email</label>
+                <input name="Email" style="flex:1; padding:5px;" />
+            </div>
+        </div>
+
+        <div style="display:flex; gap:18px; margin-bottom:1px;">
+            <div style="flex:1; display:flex; align-items:center;">
+                <label style="width:100px;">Phone</label>
+                <input name="Phone" style="flex:1; padding:5px;" />
+            </div>
+            <div style="flex:1; display:flex; align-items:center;">
+                <label style="width:100px;">Role</label>
+                <input name="Role" style="flex:1; padding:5px;" />
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- 🔹 Company Info -->
+    <fieldset style="border:none; margin-bottom:4px;">
+        <legend style=" font-weight:bold; margin-bottom:2px;">Company Info</legend>
+
+        <div style="display:flex; gap:18px; margin-bottom:2px;">
+            <div style="flex:1; display:flex; align-items:center;">
+                <label style="width:100px;">Company Name</label>
+                <input name="Company.Name" style="flex:1; padding:5px;" />
+            </div>
+            <div style="flex:1; display:flex; align-items:center;">
+                <label style="width:100px;">GSTIN</label>
+                <input name="Company.GSTIN" style="flex:1; padding:5px;" />
+            </div>
+        </div>
+
+        <div style="display:flex; gap:18px; margin-bottom:2px;">
+            <div style="flex:1; display:flex; align-items:center;">
+                <label style="width:100px;">City</label>
+                <input name="Company.City" style="flex:1; padding:5px;" />
+            </div>
+            <div style="flex:1; display:flex; align-items:center;">
+                <label style="width:100px;">State</label>
+                <input name="Company.State" style="flex:1; padding:5px;" />
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- 🔹 Login Credentials -->
+    <fieldset style="border:none; margin-bottom:4px;">
+        <legend style="font-weight:bold; margin-bottom:2px;">Login Credentials</legend>
+
+        <div style="display:flex; gap:18px; margin-bottom:2px;">
+            <div style="flex:1; display:flex; align-items:center;">
+                <label style="width:100px;">Login Email</label>
+                <input name="SellerLogin.Email" style="flex:1; padding:6px;" />
+            </div>
+            <div style="flex:1; display:flex; align-items:center;">
+                <label style="width:100px;">Password</label>
+                <input name="SellerLogin.Password" type="password" style="flex:1; padding:6px;" />
+            </div>
+        </div>
+    </fieldset>
+
+    <div style="text-align:center; margin-top:18px;">
+        <button type="submit" style="padding:8px 24px; font-size:14px; background:#007bff; color:white; border:none; border-radius:4px; cursor:pointer;">Submit</button>
+    </div>
+</form>
+
+<div id="responseMessage" style="text-align:center; margin-top:15px; font-weight:bold;"></div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#sellerForm').on('submit', function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Create", "Seller")',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        console.log(response);
+                        if (response.success) {
+                            $('#responseMessage').html('<p style="color:green;">' + response.message + '</p>');
+                            $('#sellerForm')[0].reset();
+                        }
+                        else {
+                            $('#responseMessage').html('<p style="color:red;">' + response.message + '</p>');
+                        }
+                    },
+                    error: function (xhr) {
+                        console.log(xhr.responseText);
+                        $('#responseMessage').html('<p style="color:red;">Error: ' + xhr.responseText + '</p>');
+                    }
+                });
+            });
+        });
+    </script>
+}

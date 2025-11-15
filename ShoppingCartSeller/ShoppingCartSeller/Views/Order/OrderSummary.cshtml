@@ -1,0 +1,87 @@
+﻿<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<div class="container my-4" style="font-family: 'Segoe UI', sans-serif;">
+    <div class="row">
+        <!-- Left Filter Panel -->
+        <div class="col-md-3">
+            <h5 class="mb-3">Filters</h5>
+            <div class="mb-3">
+                <h6>Status</h6>
+                <button class="btn btn-outline-secondary btn-sm filter-btn me-2" data-status="Delivered">Delivered</button>
+                <button class="btn btn-outline-secondary btn-sm filter-btn me-2" data-status="Cancelled">Cancelled</button>
+                <button class="btn btn-outline-secondary btn-sm filter-btn" data-status="Returned">Returned</button>
+            </div>
+            <div>
+                <h6>Time</h6>
+                <button class="btn btn-outline-dark btn-sm me-2">Last 30 Days</button>
+                <button class="btn btn-outline-dark btn-sm me-2">2023</button>
+                <button class="btn btn-outline-dark btn-sm me-2">2022</button>
+                <button class="btn btn-outline-dark btn-sm">2021</button>
+            </div>
+        </div>
+
+        <!-- Right Order List -->
+        <div class="col-md-9">
+            <h5 class="mb-3">Your Orders</h5>
+
+            <!-- Order Card 1 -->
+            <div class="card mb-3 order-card" data-status="Delivered" style="box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);">
+                <div class="card-body">
+                    <h6 class="mb-1">Samsung Galaxy M14 5G (6GB RAM, 128GB)</h6>
+                    <p class="mb-1 text-muted">Order #587</p>
+                    <p class="mb-1 text-success">Delivered on May 27</p>
+                    <button class="btn btn-outline-primary btn-sm">Rate & Review Product</button>
+                </div>
+            </div>
+
+            <!-- Order Card 2 -->
+            <div class="card mb-3 order-card" data-status="Delivered" style="box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);">
+                <div class="card-body">
+                    <h6 class="mb-1">boAt Rockerz 255 Pro+ Bluetooth Neckband</h6>
+                    <p class="mb-1 text-muted">Order #109 | Color: Active Black</p>
+                    <p class="mb-1 text-success">Delivered on Apr 07</p>
+                    <button class="btn btn-outline-primary btn-sm">Rate & Review Product</button>
+                </div>
+            </div>
+
+            <!-- Order Card 3 -->
+            <div class="card mb-3 order-card" data-status="Delivered" style="box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);">
+                <div class="card-body">
+                    <h6 class="mb-1">HP DeskJet 2331 All-in-One Color Printer</h6>
+                    <p class="mb-1 text-muted">Order #860</p>
+                    <p class="mb-1 text-success">Delivered on Mar 16</p>
+                    <p class="mb-1 text-muted">Metro Shopping shared this order with you</p>
+                    <button class="btn btn-outline-primary btn-sm">Rate & Review Product</button>
+                </div>
+            </div>
+
+            <!-- Order Card 4 -->
+            <div class="card mb-3 order-card" data-status="Returned" style="box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);">
+                <div class="card-body">
+                    <h6 class="mb-1">Noise ColorFit Pulse Grand Smartwatch</h6>
+                    <p class="mb-1 text-muted">Order #111 | Color: Jet Black</p>
+                    <p class="mb-1 text-danger">Refund Completed</p>
+                    <button class="btn btn-outline-primary btn-sm">Rate & Review Product</button>
+                    <button class="btn btn-outline-warning  btn-sm add">OrderDetailst</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.filter-btn').on('click', function () {
+            const status = $(this).data('status');
+            $('.order-card').hide();
+            $('.order-card').each(function () {
+                if ($(this).data('status') === status) {
+                    $(this).show();
+                }
+            });
+        });
+        $(document).on('click', '.add', function () {
+            window.location.href = '/Order/OrderDetails';
+        });
+    });
+</script>

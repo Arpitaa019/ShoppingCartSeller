@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Upload Products";
+    ViewBag.ShowNav = false;
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Upload Products via Excel</h5>
+        </div>
+        <div class="card-body">
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label">Select Excel File (.xlsx)</label>
+                    <input type="file" name="excelFile" id="excelFile" accept=".xlsx,.xls" class="form-control" required />
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-upload"></i> Upload
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4" id="uploadResult" style="display:none;">
+        <div class="alert alert-info"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#uploadForm").on("submit", function (e) {
+                e.preventDefault();
+
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: '/ProductUpload/UploadExcel',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        $("#uploadResult").show();
+                        if (res.success) {
+                            $("#uploadResult .alert")
+                                .removeClass("alert-danger")
+                                .addClass("alert-success")
+                                .text(res.message);
+                        } else {
+                            $("#uploadResult .alert")
+                                .removeClass("alert-success")
+                                .addClass("alert-danger")
+                                .text(res.message);
+                        }
+                    },
+                    error: function (err) {
+                        $("#uploadResult").show();
+                        $("#uploadResult .alert")
+                            .removeClass("alert-success")
+                            .addClass("alert-danger")
+                            .text("Error uploading file.");
+                    }
+                });
+            });
+        });
+    </script>
+}

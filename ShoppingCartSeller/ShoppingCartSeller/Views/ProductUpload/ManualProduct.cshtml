@@ -1,0 +1,128 @@
+﻿@using ProjectsLibrary.Shared.Enum
+@{
+    ViewData["Title"] = "Manual Product Page";
+    ViewBag.ShowNav = false;
+}
+
+<div class="container mt-4">
+    <h3 class="mb-3">Manual Products</h3>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Brand </th>
+                <th>Model </th>
+                <th>Material</th>
+                <th>Color</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>
+                        <span class="view-details text-primary" style="cursor:pointer;"
+                              data-id="@product.ProductMasterModel.ProductId">
+                            @product.ProductMasterModel.ProductName
+                        </span>
+                    </td>
+                    <td>
+                        <span class="view-details text-primary" style="cursor:pointer;"
+                              data-id="@product.ProductMasterModel.ProductId">
+                            @product.BrandModel.BrandName
+                        </span>
+                    <td>
+                        <span class="view-details text-primary" style="cursor:pointer;"
+                              data-id="@product.ProductMasterModel.ProductId">
+                                @product.ProductModel.ModelName
+                        </span>
+                    <td>
+                        <span class="view-details text-primary" style="cursor:pointer;"
+                              data-id="@product.ProductMasterModel.ProductId">
+                                    @product.ProductMasterModel.Material
+                        </span>
+                    <td>
+                        <span class="view-details text-primary" style="cursor:pointer;"
+                              data-id="@product.ProductMasterModel.ProductId">
+                                        @product.ProductMasterModel.Color
+                        </span>
+                        <span class="view-details text-primary" style="cursor:pointer;"
+                              data-id="@product.ProductMasterModel.ProductId">
+                                        @product.ProductMasterModel.Size
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge
+                                    @(product.ProductMasterModel.Status == ProductStatus.New ? "bg-secondary" :
+                                      product.ProductMasterModel.Status == ProductStatus.ReadyToReview ? "bg-warning text-dark" :
+                                      product.ProductMasterModel.Status == ProductStatus.ReadyToView ? "bg-info" :
+                                      product.ProductMasterModel.Status == ProductStatus.Published ? "bg-success" : "bg-light")">
+                                  @product.ProductMasterModel.Status
+                        </span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Product Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">Loading...</div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(function () {
+            $(document).on('click', '.view-details', function () {
+                const id = $(this).data('id');
+
+                // show loading state
+                $('#productModal .modal-body').html("Loading...");
+
+                $.get(`/ProductUpload/GetProductDetailsJson/${id}`, function (data) {
+                    if (!data || data.success === false) {
+                        $('#productModal .modal-body').html("<p class='text-danger'>Failed to load product.</p>");
+                        return;
+                    }
+
+                    const html = `
+                        <h5>${data.productMasterModel?.productName ?? 'N/A'}</h5>
+                        <p><strong>Brand:</strong> ${data.brandModel?.brandName ?? 'N/A'}</p>
+                        <p><strong>Category:</strong> ${data.categoryModel?.categoryName ?? 'N/A'}</p>
+                        <p><strong>SubCategory:</strong> ${data.subCategoryModel?.subCategoryName ?? 'N/A'}</p>
+                        <p><strong>Model:</strong> ${data.productModel?.modelName ?? 'N/A'}</p>
+                        <p><strong>Description:</strong> ${data.productMasterModel?.description ?? 'N/A'}</p>
+                        <p><strong>Specifications:</strong> ${data.productMasterModel?.specifications ?? 'N/A'}</p>
+                        <p><strong>Color:</strong> ${data.productMasterModel?.color ?? 'N/A'}</p>
+                        <p><strong>Size:</strong> ${data.productMasterModel?.size ?? 'N/A'}</p>
+                               <p><strong>Status:</strong>
+                                            <span class="badge ${data.productMasterModel?.status === 1 ? "bg-secondary" :
+                                                            data.productMasterModel?.status === 2 ? "bg-warning text-dark" :
+                                                                data.productMasterModel?.status === 3 ? "bg-info" :
+                                                                    data.productMasterModel?.status === 4 ? "bg-success" : "bg-light"}">
+                                                ${data.productMasterModel?.statusText ?? 'N/A'}
+                                            </span>
+                                 </p>
+                      `;
+
+                    $('#productModal .modal-body').html(html);
+                }).fail(function () {
+                    $('#productModal .modal-body').html("<p class='text-danger'>Error while fetching product details.</p>");
+                });
+
+                new bootstrap.Modal(document.getElementById('productModal')).show();
+            });
+        });
+    </script>
+}

@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Product Charges";
+    Layout = "~/Views/Shared/_LayoutSellerAdmin.cshtml";
+}
+
+<h3 class="mb-4 text-warning fw-semibold">Apply Product Charges</h3>
+<div id="chargeMessage" class="alert d-none"></div>
+
+<form id="chargesForm" class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label">Charge Name</label>
+        <input type="text" name="ChargeName" class="form-control" required />
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Amount</label>
+        <input type="number" name="Amount" class="form-control" required />
+    </div>
+
+    <div class="col-md-12">
+        <label class="form-label">Details</label>
+        <textarea name="Details" class="form-control" rows="2"></textarea>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Effective From</label>
+        <input type="date" name="EffectiveFrom" class="form-control" required />
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Effective To</label>
+        <input type="date" name="EffectiveTo" class="form-control" />
+    </div>
+
+    <div class="col-md-12 mt-3">
+        <button type="submit" class="btn btn-warning text-white">Save Charge</button>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#chargesForm').on('submit', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '/ProductPrice/ProductCharges';
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        $('#chargeMessage')
+                            .removeClass('d-none alert-danger')
+                            .addClass('alert-success')
+                            .text(response.message || 'Charge applied successfully.');
+                    },
+                    error: function () {
+                        $('#chargeMessage')
+                            .removeClass('d-none alert-success')
+                            .addClass('alert-danger')
+                            .text('Failed to apply charge.');
+                    }
+                });
+            });
+        });
+    </script>
+}

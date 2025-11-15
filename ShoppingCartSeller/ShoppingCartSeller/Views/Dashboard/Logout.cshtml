@@ -1,0 +1,20 @@
+﻿  @{
+  ViewData["Title"] = "Seller Dashboard";
+    Layout = "~/Views/Shared/_LayoutSellerAdmin.cshtml";
+}
+<h2 class="fw-bold mb-4">Account Settings</h2>
+
+
+<div class="container-fluid">
+    <div class="row">
+        
+        <!-- Main Content -->
+        <div class="col-md-10 content p-4 text-center">
+            <h2 class="fw-bold mb-4">Are you sure you want to logout?</h2>
+            <form method="post" action="/Account/LogoutConfirmed">
+                <button type="submit" class="btn btn-danger me-2">Yes, Logout</button>
+                <a href="/Seller/Dashboard" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

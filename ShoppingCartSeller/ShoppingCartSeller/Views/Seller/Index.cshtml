@@ -1,0 +1,215 @@
+﻿@{
+    ViewData["Title"] = "Sellers List";
+    ViewBag.ShowNav = false;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="d-flex justify-content-between align-items-center m-4">
+    <h2 class="mb-0">Sellers List</h2>
+    <a href="@Url.Action("Create")" class="btn btn-primary">Add New Seller</a>
+</div>
+
+<div id="responseMessage"></div>
+
+
+<table class="table table-bordered mt-3" id="sellerTable">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Company Name</th>
+            <th>UserName</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Phone</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows will be injected via AJAX -->
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        const loadUrl = '/Seller/LoadDetailsAsync';
+        $(document).ready(function () {
+            loadDetails();
+            function loadDetails() {
+                $('#responseMessage').html('<p>Loading sellers...</p>');
+                console.log('@Url.Action("LoadDetailsAsync", "Seller")');
+
+                $.ajax({
+                    type: 'GET',
+                    url: loadUrl,
+                    success: function (response) {
+                        console.log(response);
+                        if (response.success && Array.isArray(response.data.seller)) {
+                            var rowsHtml = '';
+                            response.data.seller.forEach(function (seller) {
+                                rowsHtml += `
+                                               <tr id="row-${seller.sellerId}">
+                                                 <td>${seller.fullName}</td>
+                                                <td>
+                                                    ${seller.company ? `<a href="javascript:void(0)" class="company-link" data-company='${JSON.stringify(seller.company)}'>${seller.company.name}</a>` : ''}
+                                                </td>
+                                                <td>
+                                                         ${seller.sellerLogin ? `<a href="javascript:void(0)" class="login-link" data-login='${JSON.stringify(seller.sellerLogin)}'>${seller.sellerLogin.email}</a>` : ''}
+                                                    </td>
+                                                 <td>${seller.email}</td>
+                                                 <td>${seller.role}</td>
+                                                 <td>${seller.phone}</td>
+                                                  <td>${seller.company ? seller.company.city : '' } </td>
+                                                  <td>${seller.company ? seller.company.state : ''}</td>
+                                                 <td>
+                                                            <a href="/Seller/Edit/${seller.sellerId}" class="btn btn-sm btn-warning">Edit</a>
+                                                            <button onclick="deleteSeller(${seller.sellerId})" class="btn btn-sm btn-danger">Delete</button>
+                                                </td>
+                                            </tr>
+                                        `;
+                            });
+                            $('#sellerTable tbody').html(rowsHtml);
+                            $('#responseMessage').html(''); // Clear message
+                        } else {
+                            $('#responseMessage').html('<p style="color:red;">No sellers found or error in response.</p>');
+                        }
+                    },
+                    error: function (xhr) {
+                        console.log(xhr.responseText);
+                        $('#responseMessage').html('<p style="color:red;">Error: ' + xhr.responseText + '</p>');
+                    }
+                });
+            }
+            $(document).on('click', '.company-link', function () {
+                const company = $(this).data('company');
+
+                $('#modalCompanyName').text(company.name || 'N/A');
+                $('#modalCompanyGSTIN').text(company.gstin || 'N/A');
+                $('#modalCompanyCity').text(company.city || 'N/A');
+                $('#modalCompanyState').text(company.state || 'N/A');
+                $('#modalCompanyLegalName').text(company.legalName || 'N/A');
+                $('#modalCompanyRegNo').text(company.registrationNumber || 'N/A');
+                $('#modalCompanyTaxId').text(company.taxIdentificationNumber || 'N/A');
+                $('#modalCompanyPAN').text(company.pan || 'N/A');
+                $('#modalCompanyEmail').text(company.email || 'N/A');
+                $('#modalCompanyPhone').text(company.phone || 'N/A');
+                $('#modalCompanyWebsite').text(company.website || 'N/A');
+                $('#modalCompanyCountry').text(company.country || 'N/A');
+                $('#modalCompanyPostalCode').text(company.postalCode || 'N/A');
+                $('#modalCompanyBankName').text(company.bankName || 'N/A');
+                $('#modalCompanyBankAccount').text(company.bankAccountNumber || 'N/A');
+                $('#modalCompanyIFSC').text(company.ifscCode || 'N/A');
+                $('#modalCompanyCurrency').text(company.currency || 'N/A');
+                $('#modalCompanyCapital').text(company.paidUpCapital || 'N/A');
+                $('#modalCompanyIndustry').text(company.industryType || 'N/A');
+                $('#modalCompanyBusiness').text(company.businessType || 'N/A');
+                $('#modalCompanyIncorpDate').text(company.incorporationDate || 'N/A');
+                $('#modalCompanyNotes').text(company.notes || 'N/A');
+
+                const modal = new bootstrap.Modal(document.getElementById('companyModal'), {
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                modal.show();
+            });
+
+            $(document).on('click', '.login-link', function () {
+                const login = $(this).data('login');
+
+                $('#modalLoginId').text(login.loginId || 'N/A');
+                $('#modalLoginSellerId').text(login.sellerId || 'N/A');
+                $('#modalLoginEmail').text(login.email || 'N/A');
+                $('#modalLoginPassword').text(login.password || 'N/A');
+                $('#modalLoginCreatedDate').text(login.createdDate || 'N/A');
+
+                const modal = new bootstrap.Modal(document.getElementById('loginModal'), {
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                modal.show();
+            });
+
+        });
+
+        function deleteSeller(id) {
+            if (confirm("Are you sure you want to delete this seller?")) {
+                $.post('/Seller/Delete', { id: id }, function (res) {
+                    if (res.success) {
+                        $('#responseMessage').html('<p style="color:green;">' + res.message + '</p>');
+                        loadDetails();
+                    }
+                    // if (res.success) {
+                    //     $('#row-' + id).fadeOut(300, function () {
+                    //         $(this).remove();
+                    //     });
+                    // }
+                    else {
+                        alert('Delete failed!');
+                    }
+                });
+            }
+        }
+    </script>
+}
+
+<div class="modal fade" id="companyModal" tabindex="-1" aria-labelledby="companyModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="companyModalLabel">Company Details</h5>
+                <button type="button" class="btn-md btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                        <tr><th>Name</th><td id="modalCompanyName"></td></tr>
+                        <tr><th>GSTIN</th><td id="modalCompanyGSTIN"></td></tr>
+                        <tr><th>City</th><td id="modalCompanyCity"></td></tr>
+                        <tr><th>State</th><td id="modalCompanyState"></td></tr>
+                        <tr><th>Legal Name</th><td id="modalCompanyLegalName"></td></tr>
+                        <tr><th>Registration Number</th><td id="modalCompanyRegNo"></td></tr>
+                        <tr><th>Tax ID</th><td id="modalCompanyTaxId"></td></tr>
+                        <tr><th>PAN</th><td id="modalCompanyPAN"></td></tr>
+                        <tr><th>Email</th><td id="modalCompanyEmail"></td></tr>
+                        <tr><th>Phone</th><td id="modalCompanyPhone"></td></tr>
+                        <tr><th>Website</th><td id="modalCompanyWebsite"></td></tr>
+                        <tr><th>Country</th><td id="modalCompanyCountry"></td></tr>
+                        <tr><th>Postal Code</th><td id="modalCompanyPostalCode"></td></tr>
+                        <tr><th>Bank Name</th><td id="modalCompanyBankName"></td></tr>
+                        <tr><th>Bank Account</th><td id="modalCompanyBankAccount"></td></tr>
+                        <tr><th>IFSC</th><td id="modalCompanyIFSC"></td></tr>
+                        <tr><th>Currency</th><td id="modalCompanyCurrency"></td></tr>
+                        <tr><th>Paid-Up Capital</th><td id="modalCompanyCapital"></td></tr>
+                        <tr><th>Industry Type</th><td id="modalCompanyIndustry"></td></tr>
+                        <tr><th>Business Type</th><td id="modalCompanyBusiness"></td></tr>
+                        <tr><th>Incorporation Date</th><td id="modalCompanyIncorpDate"></td></tr>
+                        <tr><th>Notes</th><td id="modalCompanyNotes"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login Details</h5>
+                <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr><th>Login ID</th><td id="modalLoginId"></td></tr>
+                        <tr><th>Seller ID</th><td id="modalLoginSellerId"></td></tr>
+                        <tr><th>Email</th><td id="modalLoginEmail"></td></tr>
+                        <tr><th>Password</th><td id="modalLoginPassword"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

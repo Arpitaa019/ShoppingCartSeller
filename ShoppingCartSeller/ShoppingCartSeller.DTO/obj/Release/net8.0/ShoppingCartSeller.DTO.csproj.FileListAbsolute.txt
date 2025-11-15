@@ -1,0 +1,12 @@
+D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\bin\Release\net8.0\ShoppingCartSeller.DTO.deps.json
+D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\bin\Release\net8.0\ShoppingCartSeller.DTO.dll
+D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\bin\Release\net8.0\ShoppingCartSeller.DTO.pdb
+D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Release\net8.0\ShoppingCartSeller.DTO.GeneratedMSBuildEditorConfig.editorconfig
+D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Release\net8.0\ShoppingCartSeller.DTO.AssemblyInfoInputs.cache
+D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Release\net8.0\ShoppingCartSeller.DTO.AssemblyInfo.cs
+D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Release\net8.0\ShoppingCartSeller.DTO.csproj.CoreCompileInputs.cache
+D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Release\net8.0\ShoppingCartSeller.DTO.sourcelink.json
+D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Release\net8.0\ShoppingCartSeller.DTO.dll
+D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Release\net8.0\refint\ShoppingCartSeller.DTO.dll
+D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Release\net8.0\ShoppingCartSeller.DTO.pdb
+D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Release\net8.0\ref\ShoppingCartSeller.DTO.dll
