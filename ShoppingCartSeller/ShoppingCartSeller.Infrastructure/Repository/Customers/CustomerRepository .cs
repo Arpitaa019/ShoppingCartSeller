@@ -1,5 +1,4 @@
-﻿using ProjectsLibrary.Infrastructure.Sql;
-using ShoppingCartSeller.Core.Entities.Customers;
+﻿using ShoppingCartSeller.Core.Entities.Customers;
 using ShoppingCartSeller.Core.Repository.Abstraction.Customers;
 using ShoppingCartSeller.Infrastructure.Sql;
 using System.Data;

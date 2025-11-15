@@ -1514,7 +1514,7 @@
       ]
     },
     "Microsoft.CSharp/4.5.0": {
-      "sha512": "EGoBmf3Na2ppbhPePDE9PlX81r1HuOZH5twBrq7couJZiPTjUnD3648balerQJO6EJ8Sj+43+XuRwQ7r+3tE3w==",
+      "sha512": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
       "type": "package",
       "path": "microsoft.csharp/4.5.0",
       "files": [
@@ -1890,7 +1890,7 @@
       ]
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
-      "sha512": "bLpT1f/SFlO1CzqXG12KnJzpZs6lv24uX2Rzi4Fmm0noJpNlnWRVryuO3yK18Ca04t/YHcO1e1Z0WDfjseqNzw==",
+      "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
       "type": "package",
       "path": "microsoft.netcore.platforms/1.1.0",
       "files": [
@@ -1910,6 +1910,7 @@
       "path": "microsoft.netcore.targets/1.1.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -2187,6 +2188,7 @@
       "path": "runtime.win-arm64.runtime.native.system.data.sqlclient.sni/4.4.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
@@ -2202,6 +2204,7 @@
       "path": "runtime.win-x64.runtime.native.system.data.sqlclient.sni/4.4.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
@@ -2217,6 +2220,7 @@
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
@@ -2607,7 +2611,7 @@
       ]
     },
     "System.Numerics.Vectors/4.5.0": {
-      "sha512": "MNcaYxUJvUcoXOa+jgKl/GDw/Mh+wMrxDjW4dre7qrp35LUGTjUBNtZsNjxsWX592ocdyqt1X5hMJB+5OStoYw==",
+      "sha512": "QQTlPTl06J/iiDbJCiepZ4H//BVraReU4O4EoRw1U02H5TLUIT7xn3GnDp9AXPSlJUDyFs4uWjWafNX6WrAojQ==",
       "type": "package",
       "path": "system.numerics.vectors/4.5.0",
       "files": [
@@ -2659,6 +2663,7 @@
       "path": "system.runtime/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3041,6 +3046,7 @@
       "path": "system.text.encoding/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3273,45 +3279,46 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "ShoppingCartSeller.DTO >= 1.0.0",
       "ShoppingCartSeller.Services >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ARPITA\\.nuget\\packages\\": {},
+    "C:\\Users\\Samrat\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MyRepo\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller.csproj",
+      "projectUniqueName": "E:\\Development\\Saloni\\AAAA\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller.csproj",
       "projectName": "ShoppingCartSeller",
-      "projectPath": "D:\\MyRepo\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller.csproj",
-      "packagesPath": "C:\\Users\\ARPITA\\.nuget\\packages\\",
-      "outputPath": "D:\\MyRepo\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller\\obj\\",
+      "projectPath": "E:\\Development\\Saloni\\AAAA\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller.csproj",
+      "packagesPath": "C:\\Users\\Samrat\\.nuget\\packages\\",
+      "outputPath": "E:\\Development\\Saloni\\AAAA\\ShoppingCartSeller\\ShoppingCartSeller\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\ARPITA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Samrat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\MyRepo\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller.DTO\\ShoppingCartSeller.DTO.csproj": {
-              "projectPath": "D:\\MyRepo\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller.DTO\\ShoppingCartSeller.DTO.csproj"
-            },
-            "D:\\MyRepo\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller.Services\\ShoppingCartSeller.Services.csproj": {
-              "projectPath": "D:\\MyRepo\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller.Services\\ShoppingCartSeller.Services.csproj"
+            "E:\\Development\\Saloni\\AAAA\\ShoppingCartSeller\\ShoppingCartSeller.Services\\ShoppingCartSeller.Services.csproj": {
+              "projectPath": "E:\\Development\\Saloni\\AAAA\\ShoppingCartSeller\\ShoppingCartSeller.Services\\ShoppingCartSeller.Services.csproj"
             }
           }
         }
@@ -3325,7 +3332,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -3349,7 +3357,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

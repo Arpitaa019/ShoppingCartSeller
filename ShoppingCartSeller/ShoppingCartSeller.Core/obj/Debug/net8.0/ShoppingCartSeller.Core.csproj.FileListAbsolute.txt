@@ -1,0 +1,16 @@
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\bin\Debug\net8.0\ShoppingCartSeller.Core.deps.json
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\bin\Debug\net8.0\ShoppingCartSeller.Core.dll
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\bin\Debug\net8.0\ShoppingCartSeller.Core.pdb
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\bin\Debug\net8.0\ShoppingCartSeller.DTO.dll
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\bin\Debug\net8.0\ShoppingCartSeller.DTO.pdb
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\obj\Debug\net8.0\ShoppingCartSeller.Core.csproj.AssemblyReference.cache
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\obj\Debug\net8.0\ShoppingCartSeller.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\obj\Debug\net8.0\ShoppingCartSeller.Core.AssemblyInfoInputs.cache
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\obj\Debug\net8.0\ShoppingCartSeller.Core.AssemblyInfo.cs
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\obj\Debug\net8.0\ShoppingCartSeller.Core.csproj.CoreCompileInputs.cache
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\obj\Debug\net8.0\ShoppingCartSeller.Core.sourcelink.json
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\obj\Debug\net8.0\Shopping.337DD0C3.Up2Date
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\obj\Debug\net8.0\ShoppingCartSeller.Core.dll
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\obj\Debug\net8.0\refint\ShoppingCartSeller.Core.dll
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\obj\Debug\net8.0\ShoppingCartSeller.Core.pdb
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.Core\obj\Debug\net8.0\ref\ShoppingCartSeller.Core.dll

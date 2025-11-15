@@ -10,3 +10,15 @@ D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Debug
 D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Debug\net8.0\refint\ShoppingCartSeller.DTO.dll
 D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Debug\net8.0\ShoppingCartSeller.DTO.pdb
 D:\MyRepo\ShoppingCartSeller\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Debug\net8.0\ref\ShoppingCartSeller.DTO.dll
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.DTO\bin\Debug\net8.0\ShoppingCartSeller.DTO.deps.json
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.DTO\bin\Debug\net8.0\ShoppingCartSeller.DTO.dll
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.DTO\bin\Debug\net8.0\ShoppingCartSeller.DTO.pdb
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Debug\net8.0\ShoppingCartSeller.DTO.GeneratedMSBuildEditorConfig.editorconfig
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Debug\net8.0\ShoppingCartSeller.DTO.AssemblyInfoInputs.cache
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Debug\net8.0\ShoppingCartSeller.DTO.AssemblyInfo.cs
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Debug\net8.0\ShoppingCartSeller.DTO.csproj.CoreCompileInputs.cache
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Debug\net8.0\ShoppingCartSeller.DTO.sourcelink.json
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Debug\net8.0\ShoppingCartSeller.DTO.dll
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Debug\net8.0\refint\ShoppingCartSeller.DTO.dll
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Debug\net8.0\ShoppingCartSeller.DTO.pdb
+E:\Development\Saloni\AAAA\ShoppingCartSeller\ShoppingCartSeller.DTO\obj\Debug\net8.0\ref\ShoppingCartSeller.DTO.dll

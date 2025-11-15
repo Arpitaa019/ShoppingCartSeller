@@ -17,9 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="ProjectsLibrary.Core">
-      <HintPath>..\..\..\ProjectsLibrary\ProjectsLibrary\bin\Debug\net8.0\ProjectsLibrary.Core.dll</HintPath>
-    </Reference>
     <Reference Include="ProjectsLibrary.Infrastructure">
       <HintPath>..\..\..\ProjectsLibrary\ProjectsLibrary.Infrastructure\bin\Debug\net8.0\ProjectsLibrary.Infrastructure.dll</HintPath>
     </Reference>

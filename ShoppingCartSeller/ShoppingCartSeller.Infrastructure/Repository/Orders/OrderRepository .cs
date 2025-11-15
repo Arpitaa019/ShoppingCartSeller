@@ -1,5 +1,4 @@
-﻿using ProjectsLibrary.Infrastructure.Sql;
-using ShoppingCartSeller.Core.Entities.Orders;
+﻿using ShoppingCartSeller.Core.Entities.Orders;
 using ShoppingCartSeller.Core.Repository.Abstraction.ProductType;
 using ShoppingCartSeller.DTO.Orders;
 using ShoppingCartSeller.Infrastructure.Sql;

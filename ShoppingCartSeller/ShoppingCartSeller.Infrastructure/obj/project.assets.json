@@ -1181,7 +1181,7 @@
       ]
     },
     "Microsoft.CSharp/4.5.0": {
-      "sha512": "EGoBmf3Na2ppbhPePDE9PlX81r1HuOZH5twBrq7couJZiPTjUnD3648balerQJO6EJ8Sj+43+XuRwQ7r+3tE3w==",
+      "sha512": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
       "type": "package",
       "path": "microsoft.csharp/4.5.0",
       "files": [
@@ -1557,7 +1557,7 @@
       ]
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
-      "sha512": "bLpT1f/SFlO1CzqXG12KnJzpZs6lv24uX2Rzi4Fmm0noJpNlnWRVryuO3yK18Ca04t/YHcO1e1Z0WDfjseqNzw==",
+      "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
       "type": "package",
       "path": "microsoft.netcore.platforms/1.1.0",
       "files": [
@@ -2209,7 +2209,7 @@
       ]
     },
     "System.Numerics.Vectors/4.5.0": {
-      "sha512": "MNcaYxUJvUcoXOa+jgKl/GDw/Mh+wMrxDjW4dre7qrp35LUGTjUBNtZsNjxsWX592ocdyqt1X5hMJB+5OStoYw==",
+      "sha512": "QQTlPTl06J/iiDbJCiepZ4H//BVraReU4O4EoRw1U02H5TLUIT7xn3GnDp9AXPSlJUDyFs4uWjWafNX6WrAojQ==",
       "type": "package",
       "path": "system.numerics.vectors/4.5.0",
       "files": [
@@ -2872,40 +2872,45 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ARPITA\\.nuget\\packages\\": {},
+    "C:\\Users\\Samrat\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MyRepo\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller.Infrastructure\\ShoppingCartSeller.Infrastructure.csproj",
+      "projectUniqueName": "E:\\Development\\Saloni\\AAAA\\ShoppingCartSeller\\ShoppingCartSeller.Infrastructure\\ShoppingCartSeller.Infrastructure.csproj",
       "projectName": "ShoppingCartSeller.Infrastructure",
-      "projectPath": "D:\\MyRepo\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller.Infrastructure\\ShoppingCartSeller.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\ARPITA\\.nuget\\packages\\",
-      "outputPath": "D:\\MyRepo\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller.Infrastructure\\obj\\",
+      "projectPath": "E:\\Development\\Saloni\\AAAA\\ShoppingCartSeller\\ShoppingCartSeller.Infrastructure\\ShoppingCartSeller.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\Samrat\\.nuget\\packages\\",
+      "outputPath": "E:\\Development\\Saloni\\AAAA\\ShoppingCartSeller\\ShoppingCartSeller.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\ARPITA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Samrat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\MyRepo\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller.Core\\ShoppingCartSeller.Core.csproj": {
-              "projectPath": "D:\\MyRepo\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller.Core\\ShoppingCartSeller.Core.csproj"
+            "E:\\Development\\Saloni\\AAAA\\ShoppingCartSeller\\ShoppingCartSeller.Core\\ShoppingCartSeller.Core.csproj": {
+              "projectPath": "E:\\Development\\Saloni\\AAAA\\ShoppingCartSeller\\ShoppingCartSeller.Core\\ShoppingCartSeller.Core.csproj"
             },
-            "D:\\MyRepo\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller.DTO\\ShoppingCartSeller.DTO.csproj": {
-              "projectPath": "D:\\MyRepo\\ShoppingCartSeller\\ShoppingCartSeller\\ShoppingCartSeller.DTO\\ShoppingCartSeller.DTO.csproj"
+            "E:\\Development\\Saloni\\AAAA\\ShoppingCartSeller\\ShoppingCartSeller.DTO\\ShoppingCartSeller.DTO.csproj": {
+              "projectPath": "E:\\Development\\Saloni\\AAAA\\ShoppingCartSeller\\ShoppingCartSeller.DTO\\ShoppingCartSeller.DTO.csproj"
             }
           }
         }
@@ -2919,7 +2924,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -2950,7 +2956,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

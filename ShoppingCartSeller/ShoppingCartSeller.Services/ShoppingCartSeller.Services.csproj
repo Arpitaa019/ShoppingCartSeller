@@ -20,10 +20,13 @@
 
   <ItemGroup>
     <Reference Include="ProjectsLibrary.Models">
-      <HintPath>..\..\..\ProjectsLibrary\ProjectsLibrary.Infrastructure\bin\Debug\net8.0\ProjectsLibrary.Models.dll</HintPath>
+      <HintPath>C:\Users\Samrat\Downloads\ProjectsLibrary.Models.dll</HintPath>
     </Reference>
     <Reference Include="ProjectsLibrary.Service">
-      <HintPath>..\..\..\ProjectsLibrary\ProjectsLibrary.Service\bin\Debug\net8.0\ProjectsLibrary.Service.dll</HintPath>
+      <HintPath>C:\Users\Samrat\Downloads\ProjectsLibrary.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="ProjectsLibrary.Shared">
+      <HintPath>C:\Users\Samrat\Downloads\ProjectsLibrary.Shared.dll</HintPath>
     </Reference>
   </ItemGroup>
 
