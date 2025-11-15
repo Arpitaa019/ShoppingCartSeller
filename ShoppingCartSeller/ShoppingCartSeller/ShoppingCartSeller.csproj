@@ -1,9 +1,41 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+	<PropertyGroup>
+		<PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+    <ProjectReference Include="..\ShoppingCartSeller.DTO\ShoppingCartSeller.DTO.csproj" />
+    <ProjectReference Include="..\ShoppingCartSeller.Services\ShoppingCartSeller.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ProjectsLibrary.Core">
+      <HintPath>..\..\..\ProjectsLibrary\ProjectsLibrary\bin\Debug\net8.0\ProjectsLibrary.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ProjectsLibrary.Infrastructure">
+      <HintPath>..\..\..\ProjectsLibrary\ProjectsLibrary.Infrastructure\bin\Debug\net8.0\ProjectsLibrary.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="ProjectsLibrary.Models">
+      <HintPath>..\..\..\ProjectsLibrary\ProjectsLibrary.Service\bin\Debug\net8.0\ProjectsLibrary.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="ProjectsLibrary.Service">
+      <HintPath>..\..\..\ProjectsLibrary\ProjectsLibrary.Service\bin\Debug\net8.0\ProjectsLibrary.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="ProjectsLibrary.Shared">
+      <HintPath>..\..\..\ProjectsLibrary\ProjectsLibrary.Service\bin\Debug\net8.0\ProjectsLibrary.Shared.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 
 </Project>
