@@ -73,6 +73,12 @@ namespace ShoppingCartSeller.Controllers
             return View();
         }
 
+        public async Task<IActionResult> OrderReport()
+        {
+            var orders = await _orderService.GetAllOrdersAsync();
+            return View(orders);
+        }
+
         //public ActionResult CreateByProduct(ProductOrderCreateDTO productOrderCreateDTO)
         //{
         //    return View();
