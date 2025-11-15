@@ -2,14 +2,12 @@
 using ShoppingCart.Services.Service.Client;
 using ShoppingCartSeller.DTO.Cart;
 using ShoppingCartSeller.DTO.Delivery;
-using ShoppingCartSeller.DTO.Discount;
 using ShoppingCartSeller.DTO.Orders;
 using ShoppingCartSeller.DTO.Payments;
 using ShoppingCartSeller.Services.Abstraction.Cart;
 using ShoppingCartSeller.Services.Abstraction.Orders;
 using ShoppingCartSeller.Services.Abstraction.Payment;
 using ShoppingCartSeller.Services.Abstraction.ProductTypePayment;
-using ShoppingCartSeller.Services.Service.Discount;
 using System.Text;
 using System.Text.Json;
 
@@ -20,7 +18,6 @@ namespace ShoppingCart.Services.Service.Order
         private readonly IInventoryService _inventory;
         private readonly IPaymentChargeService _paymentChargeService;
         private readonly IFinalAmountCalculatorService _finalAmountCalculatorService;
-        private readonly IDiscountCalculatorService _discountCalculatorService;
         private readonly IOrderService _orderService;
         private readonly IEmailClient _emailClient;
         private readonly IOrderItemService _orderItemService;
@@ -30,7 +27,6 @@ namespace ShoppingCart.Services.Service.Order
             IInventoryService inventory,
             IPaymentChargeService paymentChargeService,
             IFinalAmountCalculatorService finalAmountCalculatorService,
-            IDiscountCalculatorService discountCalculatorService,
             IOrderService orderService,
             IEmailClient emailClient,
             IOrderItemService orderItemService,
@@ -39,7 +35,6 @@ namespace ShoppingCart.Services.Service.Order
             _inventory = inventory;
             _paymentChargeService = paymentChargeService;
             _finalAmountCalculatorService = finalAmountCalculatorService;
-            _discountCalculatorService = discountCalculatorService;
             _orderService = orderService;
             _emailClient = emailClient;
             _orderItemService = orderItemService;
@@ -84,7 +79,7 @@ namespace ShoppingCart.Services.Service.Order
                             InventoryID = inventoryId.Value,
                             Price = item.UnitPrice,
                             DeliveryStatus = DeliveryStatus.Pending,
-                            Title=item.ProductName
+                            Title = item.ProductName
                         };
                         orderItems.Add(orderItemDTO);
                     }
@@ -95,15 +90,7 @@ namespace ShoppingCart.Services.Service.Order
                 decimal platformFee = _paymentChargeService.GetPlatformFee();
                 decimal methodFee = _paymentChargeService.GetPaymentMethodCharge("UPI");// use type of payment method
 
-
-                var discountRules = new List<DiscountRuleDTO>
-                {
-                    new DiscountRuleDTO { Type = "Amount", MinAmount = 500, DiscountMode = "Percentage", Value = 10 },
-                    new DiscountRuleDTO { Type = "PaymentMethod", PaymentMethod = "UPI", DiscountMode = "Percentage", Value = 5 }
-                };
-
-                var discountAmount = _discountCalculatorService.CalculateDiscount(request.items, baseAmount, request.paymentInformation, discountRules);
-                decimal finalAmount = baseAmount + platformFee + methodFee - discountAmount;
+                decimal finalAmount = baseAmount + platformFee + methodFee;
 
                 request.paymentInformation.Amount = finalAmount;
                 request.paymentInformation.Status = "Pending";
@@ -147,7 +134,7 @@ namespace ShoppingCart.Services.Service.Order
                 //  Simulate Payment Collection
                 bool paymentSuccess = await SimulateThirdPartyPaymentAsync(request.paymentInformation);
 
-               await  _orderService.UpdatePaymentTransaction(orderId, "paymentTransactionId");
+                await _orderService.UpdatePaymentTransaction(orderId, "paymentTransactionId");
 
                 //OrderStatusLogDTO orderStatusLogDTO = new OrderStatusLogDTO();
                 // IOrderStatusLogService orderStatusLogService = new OrderStatusLogService();
@@ -170,10 +157,10 @@ namespace ShoppingCart.Services.Service.Order
 
                 return createdOrder;
             }
-             catch (Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error in PlaceOrderAsync: {ex.Message}");
-                throw; 
+                throw;
             }
 
 
@@ -190,20 +177,20 @@ namespace ShoppingCart.Services.Service.Order
         private async Task<bool> SimulateThirdPartyPaymentAsync(PaymentInformationDTO payment)
         {
 
-            OrderPaymentRequest opr= new OrderPaymentRequest();
+            OrderPaymentRequest opr = new OrderPaymentRequest();
             opr.Amount = payment.Amount;
-            opr.OrderNumber=System.Guid.NewGuid().ToString();
+            opr.OrderNumber = System.Guid.NewGuid().ToString();
             opr.PaymentMethod = "UPI";
 
 
-            HttpClient httpClient=new HttpClient();
-            httpClient.BaseAddress =new Uri("http://localhost:82");
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri("http://localhost:82");
             httpClient.DefaultRequestHeaders.Accept.Clear();
 
             httpClient.DefaultRequestHeaders.Add("AuthenticationKey", "saloni123");
             httpClient.DefaultRequestHeaders.Add("ClientName", "saloni");
 
-            var jsonDate =JsonSerializer.Serialize(opr);
+            var jsonDate = JsonSerializer.Serialize(opr);
             var content = new StringContent(jsonDate, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await httpClient.PostAsync("api/Payments", content);
@@ -243,4 +230,4 @@ namespace ShoppingCart.Services.Service.Order
             throw new NotImplementedException();
         }
     }
-} 
+}

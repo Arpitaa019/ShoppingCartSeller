@@ -1,7 +1,10 @@
-﻿namespace ShoppingCartSeller.Core.Entities.Sellers
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ShoppingCartSeller.Core.Entities.Sellers
 {
     public class SellerLogin
     {
+        [Key]
         public int LoginId { get; set; }
         public int SellerId { get; set; }
         public string Email { get; set; }

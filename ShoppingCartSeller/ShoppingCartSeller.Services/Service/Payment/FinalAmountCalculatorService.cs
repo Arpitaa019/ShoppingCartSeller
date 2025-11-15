@@ -1,6 +1,5 @@
 ﻿
 
-using ShoppingCartSeller.DTO.Discount;
 using ShoppingCartSeller.DTO.Payments;
 using ShoppingCartSeller.Services.Abstraction.ProductTypePayment;
 
@@ -13,12 +12,11 @@ namespace ShoppingCartSeller.Services.Service.Payment
         public FinalAmountBreakdown CalculateFinalAmount(
             decimal baseAmount,
             string paymentMethod,
-            DiscountDTO discount = null,
             List<ChargeDTO> additionalCharges = null)
         {
             var paymentCharge = GetPaymentMethodCharge(paymentMethod);
             var cashback = GetCashback(paymentMethod, baseAmount);
-            var discountAmount = CalculateDiscount(baseAmount, discount);
+            var discountAmount = 1;// CalculateDiscount(baseAmount);
             var otherCharges = additionalCharges?.Sum(c => c.Amount) ?? 0;
 
             var finalAmount = baseAmount + PlatformFee + paymentCharge + otherCharges - discountAmount - cashback;
@@ -57,18 +55,6 @@ namespace ShoppingCartSeller.Services.Service.Payment
             {
                 "UPI" => Math.Round(amount * 0.05m, 2),
                 "CARD" => Math.Round(amount * 0.02m, 2),
-                _ => 0
-            };
-        }
-
-        private decimal CalculateDiscount(decimal amount, DiscountDTO discount)
-        {
-            if (discount == null) return 0;
-
-            return discount.Type?.ToUpper() switch
-            {
-                "FLAT" => discount.Value,
-                "PERCENTAGE" => Math.Round(amount * (discount.Value / 100), 2),
                 _ => 0
             };
         }

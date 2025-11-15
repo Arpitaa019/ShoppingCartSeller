@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProjectsLibrary.Models.Product;
 using ShoppingCartSeller.DTO.Cart;
-using ShoppingCartSeller.DTO.Discount;
 using ShoppingCartSeller.DTO.Orders;
 using ShoppingCartSeller.DTO.Payments;
 using ShoppingCartSeller.Services.Abstraction.Orders;
@@ -150,12 +148,7 @@ namespace ShoppingCartSeller.Controllers
                         ReferenceNumber = "NBK202510120001"
                     },
 
-                    GiftCard = new GiftCardDetailsDTO
-                    {
-                        GiftCardCode = "FLIP-GIFT-2025",
-                        RedeemedAmount = 100.00m
-                    },
-
+                 
                     EMI = new EmiDetailsDTO
                     {
                         Provider = "Bajaj Finserv",

@@ -1,5 +1,4 @@
-﻿using ShoppingCartSeller.DTO.Discount;
-
+﻿
 namespace ShoppingCartSeller.DTO.Payments
 {
     public class PaymentInformationDTO
@@ -13,7 +12,6 @@ namespace ShoppingCartSeller.DTO.Payments
         public UpiDetailsDTO Upi { get; set; }
         public CardDetailsDTO Card { get; set; }
         public NetBankingDetailsDTO NetBanking { get; set; }
-        public GiftCardDetailsDTO GiftCard { get; set; }
         public EmiDetailsDTO EMI { get; set; }
         public CodDetailsDTO COD { get; set; }
     }

@@ -1,8 +1,11 @@
-﻿namespace ShoppingCartSeller.Core.Entities.Sellers
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ShoppingCartSeller.Core.Entities.Sellers
 {
     public class Company
     {
         // Identity
+        [Key]
         public int CompanyId { get; set; }
         public string Name { get; set; }
         public string? LegalName { get; set; }

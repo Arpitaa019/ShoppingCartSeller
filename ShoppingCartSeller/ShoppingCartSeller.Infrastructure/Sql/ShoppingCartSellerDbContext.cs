@@ -1,9 +1,9 @@
-using ShoppingCartSeller.Core.Entities.Customers;
-using ShoppingCartSeller.Core.Entities.Orders;
-using ShoppingCartSeller.Core.Entities.Discounts;
-using ShoppingCartSeller.Core.Entities.Sellers;
-using ShoppingCartSeller.Core.Entities.Notifications;
 using Microsoft.EntityFrameworkCore;
+using ShoppingCartSeller.Core.Entities.Customers;
+using ShoppingCartSeller.Core.Entities.Notifications;
+using ShoppingCartSeller.Core.Entities.Orders;
+using ShoppingCartSeller.Core.Entities.Sellers;
+using ShoppingCartSeller.DTO.Customers;
 
 namespace ShoppingCartSeller.Infrastructure.Sql
 {
@@ -14,13 +14,10 @@ namespace ShoppingCartSeller.Infrastructure.Sql
  {
  }
 
- public DbSet<Customer> Customers { get; set; }
+
  public DbSet<CustomerInteraction> CustomerInteractions { get; set; }
  public DbSet<Order> Orders { get; set; }
  public DbSet<OrderItem> OrderItems { get; set; }
- public DbSet<DiscountBase> Discounts { get; set; }
- public DbSet<CouponWiseDiscount> CouponWiseDiscounts { get; set; }
- public DbSet<SellerWiseDiscount> SellerWiseDiscounts { get; set; }
  public DbSet<Company> Companies { get; set; }
  public DbSet<SellerDetails> SellerDetails { get; set; }
  public DbSet<SellerLogin> SellerLogins { get; set; }
@@ -28,11 +25,12 @@ namespace ShoppingCartSeller.Infrastructure.Sql
 
  protected override void OnModelCreating(ModelBuilder modelBuilder)
  {
- base.OnModelCreating(modelBuilder);
- modelBuilder.Entity<DiscountBase>()
- .HasDiscriminator<string>("DiscountType")
- .HasValue<CouponWiseDiscount>("Coupon")
- .HasValue<SellerWiseDiscount>("Seller");
+ 
+ 
+
+
+            base.OnModelCreating(modelBuilder);
+ 
  }
  }
 }

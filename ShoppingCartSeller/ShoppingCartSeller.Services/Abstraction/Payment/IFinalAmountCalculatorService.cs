@@ -1,5 +1,4 @@
-﻿using ShoppingCartSeller.DTO.Discount;
-using ShoppingCartSeller.DTO.Payments;
+﻿using ShoppingCartSeller.DTO.Payments;
 
 namespace ShoppingCartSeller.Services.Abstraction.ProductTypePayment
 {
@@ -8,7 +7,6 @@ namespace ShoppingCartSeller.Services.Abstraction.ProductTypePayment
         FinalAmountBreakdown CalculateFinalAmount(
             decimal baseAmount,
             string paymentMethod,
-            DiscountDTO discount = null,
             List<ChargeDTO> additionalCharges = null
         );
 
