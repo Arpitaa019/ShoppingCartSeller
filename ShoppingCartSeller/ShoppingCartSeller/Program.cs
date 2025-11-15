@@ -31,7 +31,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddProjectsLibraryServices();
-
 builder.Services.AddSingleton<DbHelper>();
 
 builder.Services.AddSingleton<ISellerDetailsRepository, SellerDetailsRepository>();
@@ -77,7 +76,6 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
         });
     };
 });
-
 
 var app = builder.Build();
 

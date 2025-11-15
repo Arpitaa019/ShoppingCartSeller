@@ -15,7 +15,6 @@ namespace ShoppingCartSeller.Controllers
         private readonly IOrderService _orderService;
         private readonly IConfiguration _configuration;
         private readonly PriceCalculatorService _calculator;
-
         public DashboardController(IOrderService orderService, IProductService productService, IConfiguration configuration, PriceCalculatorService calculator)
         {
             _productService = productService;
@@ -23,7 +22,6 @@ namespace ShoppingCartSeller.Controllers
             _configuration = configuration;
             _calculator = calculator;
         }
-
         public async Task<IActionResult> Index()
         {
         
@@ -36,7 +34,6 @@ namespace ShoppingCartSeller.Controllers
 
             return View(products ?? new List<ProductUploadModel>());
         }
-
         public async Task<IActionResult> LoadProductDetails()
         {
             try
